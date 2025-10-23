@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView.vue';
 import TvView from '@/views/TVView.vue';
 import MoviesView from '@/views/MoviesView.vue';
 import DetailsView from "@/views/DetailsView.vue";
+import TVDetails from "@/views/TVDetails.vue";
 
 const routes = [{
     path: '/',
@@ -23,6 +24,12 @@ const routes = [{
     path: '/movies/:movieId',
     name: 'MovieDetails',
     component: DetailsView,
+    props: true,
+},
+{
+    path: '/tv/:TVId',
+    name: 'TVDetails',
+    component: TVDetails,
     props: true,
 },
 ]
