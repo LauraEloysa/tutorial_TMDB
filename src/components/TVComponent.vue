@@ -1,8 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import api from '@/plugins/axios';
+import { useRouter } from 'vue-router';
 import Loading from 'vue-loading-overlay';
 
+
+const router = useRouter();
 const isLoading = ref(false);
 const genres = ref([]);
 const tvShows = ref([]);
@@ -35,6 +38,10 @@ onMounted(async () => {
   await getAllGenres();
   isLoading.value = false;
 });
+
+function openTV(TVId) {
+  router.push({ name: 'TVDetails', params: { TVId } });
+}
 </script>
 
 <template>
@@ -51,7 +58,7 @@ onMounted(async () => {
 
   <div class="shows-list">
     <div v-for="show in tvShows" :key="show.id" class="shows-card">
-      <img :src="`https://image.tmdb.org/t/p/w500${show.poster_path}`" :alt="show.original_name" />
+      <img :src="`https://image.tmdb.org/t/p/w500${show.poster_path}`" :alt="show.original_name"  @click="openTV(show.id)"/>
       <div class="shows-details">
         <p class="shows-title">{{ show.original_name }}</p>
         <p class="shows-release-date">{{ show.first_air_date }}</p>
